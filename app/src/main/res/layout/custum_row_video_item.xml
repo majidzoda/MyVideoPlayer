@@ -21,7 +21,12 @@
             android:layout_weight="7"
             android:layout_marginBottom="@dimen/activity_horizontal_margin">
 
-
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/activity_horizontal_margin"
+                android:id="@+id/imageView"
+                android:layout_weight="6"/>
 
             <TextView
                 android:text="Title"
@@ -32,13 +37,6 @@
                 android:layout_centerHorizontal="true"
                 android:layout_margin="@dimen/activity_horizontal_margin"
                 android:background="#006699"/>
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="@dimen/activity_horizontal_margin"
-                android:id="@+id/imageView"
-                android:layout_weight="6"/>
         </RelativeLayout>
 
 
