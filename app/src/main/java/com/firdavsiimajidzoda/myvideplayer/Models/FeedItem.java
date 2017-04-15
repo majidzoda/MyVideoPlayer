@@ -9,12 +9,12 @@ package com.firdavsiimajidzoda.myvideplayer.Models;
  */
 public class FeedItem {
     // Fields
-    String title;
-    String link;
-    String description;
-    String pubDate;
-    String duration;
-    String thumbnail;
+    String title = null;
+    String link = null;
+    String description = null;
+    String pubDate = null;
+    String duration = null;
+    String thumbnail = null;
 
     // Setter and getters
     public String getDuration() {

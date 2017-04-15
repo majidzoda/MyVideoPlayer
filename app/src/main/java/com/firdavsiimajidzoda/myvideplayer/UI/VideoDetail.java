@@ -51,9 +51,21 @@ public class VideoDetail extends AppCompatActivity {
             }
 
             public void onPageFinished(WebView view, String url) {
-                if (progressBar.isShowing()) {
-                    progressBar.dismiss();
+
+                try {
+                    if ((progressBar != null) && progressBar.isShowing()) {
+                        progressBar.dismiss();
+                    }
+                } catch (final IllegalArgumentException e) {
+                    // Handle or log or ignore
+                } catch (final Exception e) {
+                    // Handle or log or ignore
+                } finally {
+                    progressBar = null;
                 }
+//                if (progressBar.isShowing()) {
+//                    progressBar.dismiss();
+//                }
             }
 
             public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {

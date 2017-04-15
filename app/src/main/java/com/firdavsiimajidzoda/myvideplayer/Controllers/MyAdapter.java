@@ -39,6 +39,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewholder> {
     @Override
     public MyViewholder onCreateViewHolder(ViewGroup parent, int viewType) {
         // Setting view holder
+
+
         View view  = LayoutInflater.from(context).inflate(R.layout.custum_row_video_item, parent, false);
         MyViewholder holder = new MyViewholder(view);
         return holder;
@@ -55,14 +57,39 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewholder> {
         final FeedItem current = feedItems.get(position);
 
         // Set the items field
-        holder.title.setText(current.getTitle());
-        holder.duration.setText("Duration: "+current.getDuration());
-        holder.pubDate.setText("Year: "+current.getPubDate());
-        holder.description.setText(current.getDescription());
+        if (current.getTitle() == null || current.getTitle().equals("")){
+            holder.title.setText("Title: Unknown");
+        } else {
+            holder.title.setText(current.getTitle());
+        }
+
+        if (current.getDuration() == null || current.getDuration().equals("")){
+            holder.duration.setText("Duration: unknown");
+        } else {
+            holder.duration.setText("Duration: "+calculateSeconds(current.getDuration()));
+        }
+
+        if (current.getPubDate() == null || current.getPubDate().equals("")){
+            holder.pubDate.setText("Year: Unknown");
+        } else {
+            holder.pubDate.setText("Year: "+current.getPubDate());
+        }
+
+        if (current.getDescription() == null || current.getDescription().equals("")){
+            holder.description.setText("Description: Unknown");
+        } else {
+            holder.description.setText(current.getDescription());
+        }
 
         // Download the thumbnail picture and set it to items pictuer
 
-        Picasso.with(context).load(current.getThumbnail()).into(holder.image);
+        if (current.getThumbnail() == null || current.getThumbnail().equals("")){
+            holder.image.setBackgroundResource(R.drawable.default_video);
+        } else {
+            Picasso.with(context).load(current.getThumbnail()).into(holder.image);
+        }
+
+
 
         // Open video detail on click
         holder.cardView.setOnClickListener(new View.OnClickListener() {
@@ -73,9 +100,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewholder> {
                 context.startActivity(intent);
             }
         });
-
-
-
     }
 
     @Override
@@ -103,6 +127,30 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewholder> {
             cardView = (CardView)itemView.findViewById(R.id.cardView);
 
         }
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
+
+    /**
+     * Calculates secodnds into minute:seconds format
+     * @param seconds
+     * @return minuete:second format
+     */
+    private String calculateSeconds(String seconds){
+        System.out.print(seconds);
+        int sec = Integer.parseInt(seconds);
+        int minute = sec/60;
+        int second = sec - (minute*60);
+
+        return minute+":"+second;
     }
 }
 
